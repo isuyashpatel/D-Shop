@@ -8,7 +8,6 @@ exports.getproducts = (req, res, next) => {
 
 exports.getproduct = (req, res, next) => {
     const prodId = req.params.productId;
-    console.log(prodId);
     res.redirect('/');
 }
 
