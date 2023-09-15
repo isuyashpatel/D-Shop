@@ -8,7 +8,9 @@ exports.getproducts = (req, res, next) => {
 
 exports.getproduct = (req, res, next) => {
     const prodId = req.params.productId;
-    res.redirect('/');
+    Product.findById(prodId, product => {
+        res.render('shop/product-details', { product: product, title: 'Shop-D:Product Details', path: '/products' })
+    })
 }
 
 exports.getIndex = (req, res, next) => {
@@ -23,6 +25,12 @@ exports.getCart = (req, res, next) => {
         title: 'D-Shop:Your Cart'
     })
 }
+
+exports.postCart = (req, res, next) => {
+    const prodId = req.body.productId;
+    console.log(prodId);
+    res.redirect('/cart');
+}  
 
 exports.getOrders = (req, res, next) => {
     res.render('shop/orders', {
