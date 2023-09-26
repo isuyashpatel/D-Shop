@@ -23,6 +23,10 @@ exports.getEditProduct = (req, res, next) => {
 
 }
 
+exports.postEditProduct = (req, res, next) => {
+    console.log(req.body);
+}
+
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
     const imageUrl = req.body.imageUrl;
