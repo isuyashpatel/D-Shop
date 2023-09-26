@@ -1,7 +1,26 @@
 const Product = require('../models/product.models')
 
 exports.getAddProduct = (req, res, next) => {
-    res.render('admin/add-product', { title: 'D-Shop:Add Products', path: '/admin/add-product', activeAddProduct: true })
+    res.render('admin/add-product', { title: 'D-Shop:Add Products', path: '/admin/add-product', activeAddProduct: true, editing: false })
+}
+
+
+exports.getEditProduct = (req, res, next) => {
+
+    const editMode = req.query.edit;
+
+    if (!editMode) {
+        return res.redirect('/');
+    }
+    const prodId = req.params.productId;
+    console.log(prodId);
+    Product.findById(prodId, product => {
+        if (!product) {
+            return res.redirect('/');
+        }
+        res.render('admin/add-product', { title: 'D-Shop:Edit Products', path: '/admin/edit-product', editing: editMode, product: product })
+    })
+
 }
 
 exports.postAddProduct = (req, res, next) => {
